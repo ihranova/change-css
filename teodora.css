@@ -11,14 +11,12 @@
 
 /* --- TOP HEADER START --- */
 .top-header {
-    background-color: #b68969;
+    background-color: var(--wp--preset--color--primary);
     padding: 8px 0;
-    font-family: Sofia Sans, sans-serif;
     min-height: 45px;
     display: flex;
     align-items: center;
 }
-
 
 .top-header .row.top-header-inner {
     display: flex;
@@ -39,7 +37,7 @@
 }
 
 .top-header .top-header-info a {
-    color: #ffffff;
+    color: var(--wp--preset--color--white);
     text-decoration: none;
     font-size: 13px; 
     display: flex;
@@ -51,7 +49,7 @@
 .top-header .top-header-info svg {
     width: 16px;
     height: 16px;
-    stroke: #ffffff;
+    stroke: var(--wp--preset--color--white);
     fill: none;
 }
 
@@ -64,7 +62,7 @@
 }
 
 .top-header .social-links a {
-    color: #ffffff;
+    color: var(--wp--preset--color--white);
     display: flex;
     transition: opacity 0.2s;
 }
@@ -75,7 +73,7 @@
 }
 
 .top-header .social-links svg path {
-    fill: #ffffff ;
+    fill: var(--wp--preset--color--white);
 }
 
 .top-header a:hover {
@@ -113,7 +111,6 @@
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
-  padding: 15px 0;
   transition: all 0.3s ease;
 }
 
@@ -126,48 +123,55 @@
   background: #ffffff;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   animation: slideDown 0.5s ease forwards;
-  padding: 10px 5%;
 }
 
-.sticky-header #primary-menu > li > a {
-  color: #123759;
+.header-transparent:not(.sticky-header){
+    position: absolute;
+    left: 0;
+    top:var(--top-bar-height, 45px);
+    width: 100%;
+    z-index: 999;
+}
+.header-transparent:not(.sticky-header) #primary-menu > li > a {
+  color: var(--wp--preset--color--white);
 }
 
-.header-transparent #primary-menu > li > a {
-  color: #ffffff;
-}
-
-.header-transparent .custom-logo-link img {
+.header-transparent:not(.sticky-header) img {
   filter: brightness(0) invert(1);
 }
-
-.header-default {
-    background: rgba(239, 239, 239, 0.76);
-    border: none;
+.header-transparent:not(.sticky-header) .submenu-toggle svg {
+    fill: var(--wp--preset--color--white);
 }
-.header-default #primary-menu > li > a {
-  color: #111111;
+header{
+    border-bottom: 0.5px solid rgba(255,255,255,0.4);
+}
+.header-default {
+    background: var(--wp--preset--color--white);
+}
+.header-default a {
+  color: var(--wp--preset--color--black);
+}
+/*fix header in admin bar header*/
+.admin-bar .header-transparent:not(.sticky-header){
+    --top-bar-height:75px;
+}
+
+@media(max-width: 720px){
+    .top-header{
+        display: none;
+    }
+    .admin-bar .header-transparent:not(.sticky-header){
+        --top-bar-height:45px;
+    }
+    .header-transparent:not(.sticky-header){
+        --top-bar-height:0px;
+    }
 }
 
 /* ЛОГО - ИЗЧИСТЕНО */
 .site-branding {
   max-width: 200px;
   width: 100%;
-}
-
-.site-branding a.custom-logo-link {
-  text-decoration: none;
-  border: none;
-  outline: none;
-  box-shadow: none;
-  display: block;
-}
-
-.site-branding img {
-  display: block;
-  height: auto;
-  max-width: 100%;
-  border: none;
 }
 
 .main-navigation {
@@ -183,12 +187,6 @@
   padding: 0;
 }
 
-#primary-menu li {
-  list-style: none;
-  position: relative;
-  border: none;
-}
-
 #primary-menu li a {
   text-decoration: none;
   color: inherit;
@@ -196,13 +194,7 @@
   transition: 0.3s;
   display: flex;
   align-items: center;
-  border: none;
-  box-shadow: none;
-}
-
-#primary-menu .menu-item-has-children > a::after {
-  content: none;
-  display: none;
+  padding: 20px 0;
 }
 
 .submenu-toggle {
@@ -227,37 +219,28 @@
   top: 100%;
   left: 0;
   min-width: 220px;
-  background: #ffffff;
-  box-shadow: 0 10px 30px rgba(239, 239, 239, 0.76);;
-  border-top: 3px solid #737476;
-  border-bottom: 0;
-  border-left: 0;
-  border-right: 0;
-  padding: 10px 0;
-  margin: 0;
-  list-style: none;
+  background: var(--wp--preset--color--white);
+  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.05), -2px 0px 5px 1px rgba(0, 0, 0, 0.05);
+  margin-top: 0px;
   display: block;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(15px);
+  transform: translateY(25px);
   transition: all 0.4s ease;
   z-index: 99;
 }
 
-#primary-menu .sub-menu li {
-  border: 0;
-  margin: 0;
-  padding: 0;
+#primary-menu .sub-menu li{
+    border-bottom: 1px solid var(--wp--preset--color--light);
 }
 
 #primary-menu .sub-menu li a {
-  color: #111111;
+  color: var(--wp--preset--color--black);
   padding: 10px 20px;
   font-size: 15px;
   display: block;
-  border: 0;
-  box-shadow: none;
-  text-decoration: none;
+  width:100%;
+
 }
 
 #primary-menu li:hover > .sub-menu {
@@ -266,65 +249,52 @@
   transform: translateY(0);
 }
 
-.sub-menu li a:hover {
-  background: #f9f9f9;
-  padding-left: 25px;
-}
 
-.sub-menu .submenu-toggle svg {
-  fill: #111111;
-}
 
 /* --- HEADER Layout END --- */
 
 
 /* --- FOOTER START --- */
 .site-footer {
-  background-color: #123759;
-  color: #ffffff;
+  background-color: var(--wp--preset--color--tertiary);
+  color: var(--wp--preset--color--white);
   padding: 60px 0 0 0;
-  font-family: "Sofia Sans", sans-serif;
 }
-
+.site-footer .wp-block-image{
+    position: relative;
+    margin-bottom: 50px;
+}
 .site-footer .wp-block-image img {
     filter: brightness(0) invert(1) ;
     -webkit-filter: brightness(0) invert(1);
     margin-bottom: 0; 
 }
-
-.site-footer .wp-block-image {
-    position: relative;
-    display: block;
-    margin-bottom: 40px; 
-    border: none;
-}
-
 .site-footer .wp-block-image::after {
     content: "";
     position: absolute;
     bottom: -20px; 
     left: 0;     
     width: 90px;   
-    height: 4px;  
-    background-color: #ffffff; 
+    height: 3px;  
+    background-color: var(--wp--preset--color--white);
     display: block;
 }
 
 .site-footer .social-links svg,
 .site-footer .social-links svg path {
-    fill: #ffffff;
+    fill: var(--wp--preset--color--white);
     stroke: none;
 }
 
 
 .site-footer .social-links a[title*="Instagram"] svg {
     fill: none;
-    stroke: #ffffff;
+    stroke:var(--wp--preset--color--white);
     stroke-width: 1.5px;
 }
 
 .site-footer .widget_block svg {
-    stroke: #ffffff; 
+    stroke: var(--wp--preset--color--white);
     fill: none;
     vertical-align: middle;
     margin-right: 8px;
@@ -345,7 +315,7 @@
 .site-footer .widget-title,
 .site-footer h2,
 .site-footer h3 {
-  color: #ffffff;
+  color: var(--wp--preset--color--white);
   font-size: 18px;
   font-weight: 700;
   margin-bottom: 25px;
@@ -358,10 +328,7 @@
 .site-footer .widget a,
 .site-footer .footer-links a,
 .site-footer ul li a {
-  color: #ffffff;
-  text-decoration: none;
-  border-bottom: none;
-  box-shadow: none;
+  color: var(--wp--preset--color--white);
   font-size: 16px;
   font-weight: 400;
   transition: opacity 0.3s ease;
@@ -388,21 +355,25 @@
   margin: 20px 0;
   display: block;
 }
-
-.site-footer ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.site-footer ul{
+    list-style: none;
+    margin:0;
+    padding:0;
 }
-
 .site-footer ul li {
   margin-bottom: 12px;
-  border: none;
+}
+.site-footer a.office-phone{
+    font-size: 23px;
+}
+.site-footer .office-email svg,
+.site-footer .office-location svg{
+    width: 20px;
 }
 
 /* Copyright секция */
 .copyright-info {
-  background-color: #00315e;
+  background-color: var(--wp--preset--color--quaternary);
   padding: 20px 0;
   margin-top: 50px;
   font-size: 13px;
@@ -412,7 +383,8 @@
 .copyright-info a {
   font-size: 13px;
   margin-left: 15px;
-  color: rgba(255, 255, 255, 0.7);
+  text-decoration: underline;
+  opacity: 0.8;
 }
 
 .site-footer .widget_text a,
@@ -429,7 +401,7 @@
 /* --- FOOTER END --- */
 
 
-/* --- MOBILNO MENU START --- */
+/* --- MOBILE MENU START --- */
 .mobile-menu .navigation, 
 .mobile-menu .navigation ul, 
 .mobile-menu .navigation li {
@@ -448,6 +420,9 @@
     border: none;        
     padding: 0;          
     line-height: 1;
+}
+.header-transparent:not(.sticky-header) .menu-toggle .hamburger-box svg{
+    fill: var(--wp--preset--color--white);
 }
 
 @media (max-width: 1024px) {
@@ -497,7 +472,7 @@
     flex-direction: column;
     width: 100%;
     height: 100%;
-    background: #ffffff; 
+    background:var(--wp--preset--color--white);
     z-index: 5;
     opacity: 0;
     visibility: hidden;
@@ -517,37 +492,34 @@
     justify-content: space-between;
     align-items: center;
     padding: 25px 20px;
-    border-bottom: 1px solid #efefef;
+    border-bottom: 1px solid var(--wp--preset--color--light);
 }
-
+.mobile-menu .close-btn{
+    cursor: pointer;
+}
 .mobile-menu .close-btn svg {
-    fill: #111111; 
+    fill: var(--wp--preset--color--black);
 }
 
 /* --- НАВИГАЦИЯ --- */
 .mobile-menu .navigation li {
     position: relative;
-    border-bottom: 1px solid #efefef;
     width: 100%;
     overflow: hidden; 
 }
 
 .mobile-menu .navigation li a {
-    color: #111111;
-    padding: 18px 25px;
+    color: var(--wp--preset--color--black);
+    line-height: 28px;
+    padding: 10px 5px 10px 20px;  
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 400;
     text-decoration: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
     transition: 0.3s;
-    border: none;
-    box-shadow: none;
-}
-
-.mobile-menu .navigation li a:hover {
-    background: #ffffff;
+    border-bottom: 1px solid var(--wp--preset--color--light);
 }
 
 .mobile-menu .navigation ul.sub-menu {
@@ -555,27 +527,19 @@
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-    background: #ffffff;
     padding: 0;
     margin: 0;
     transition: max-height 0.5s ease, opacity 0.4s ease;
 }
-
-.mobile-menu .navigation li.menu-item-has-children:hover > ul.sub-menu,
-.mobile-menu .navigation li.open > ul.sub-menu {
+.mobile-menu .navigation li.open > ul.sub-menu.open {
     max-height: 300px; 
     opacity: 1;
-    padding-bottom: 10px !important;
-}
-
-.mobile-menu .navigation ul.sub-menu li {
-    border-bottom: none;
 }
 
 .mobile-menu .navigation ul.sub-menu li a {
     padding: 12px 20px 12px 45px; 
     font-size: 14px;
-    color: #111111;
+    color: var(--wp--preset--color--black);
 }
 
 /* Стрелката за подменю */
@@ -583,25 +547,30 @@
     display: flex;
     align-items: center;
     margin-left: auto;
-    padding: 10px;
+    padding: 10px 15px;
     transition: transform 0.3s ease;
+    border-left: 1px solid var(--wp--preset--color--light);
+
 }
 
-.mobile-menu .navigation li.menu-item-has-children:hover .submenu-toggle,
 .mobile-menu .navigation li.open .submenu-toggle {
-    transform: rotate(180deg);
+    transform: rotate(180deg);  
+    border-left: 0;
+    border-right: 1px solid var(--wp--preset--color--light);
+ 
 }
 
 .mobile-menu .submenu-toggle svg {
-    fill: #111111;
+    fill: var(--wp--preset--color--black);
+    width: 20px;
+    height: 16px;
 }
 
 /* --- КОНТАКТИ --- */
 .mobile-menu .contact-list {
     padding: 30px 25px; 
     margin-top: 0; 
-    background: #ffffff;
-    border-top: 1px solid #efefef;    
+    border-top: 1px solid var(--wp--preset--color--light); 
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -615,8 +584,8 @@
 .mobile-menu .contact-list .icon-box i {
     width: 32px;
     height: 32px;
-    fill: #111111;
-    color: #111111;
+    fill: var(--wp--preset--color--tertiary);
+    color: var(--wp--preset--color--tertiary);
     display: block;
 }
 
@@ -628,17 +597,17 @@
 .mobile-menu .contact-list .email-label {
     font-size: 10px;
     text-transform: uppercase;
-    color: #efefef; 
+    color: var(--wp--preset--color--light);
     letter-spacing: 1px;
     margin-bottom: 2px;
 }
 
 .mobile-menu .contact-list a {
-    color: #111111; 
+    color: var(--wp--preset--color--tertiary);
     text-decoration: none;
     font-weight: 600;
     font-size: 15px;
-    border-bottom: 2px solid #111111;
+    border-bottom: 2px solid;
     line-height: 1.2;
     display: inline-block;
 }
@@ -647,16 +616,16 @@
 .mobile-menu .social-links {
     margin-top: auto;
     display: flex;
-    background: #ffffff;
-    border-top: 1px solid #efefef;
+    background: var(--wp--preset--color--white);
+    border-top: 1px solid var(--wp--preset--color--light);
 }
 
 .mobile-menu .social-links a {
     flex: 1;
     text-align: center;
     padding: 20px 0;
-    color: #111111;
-    border-right: 1px solid #efefef;
+    color: var(--wp--preset--color--black);
+    border-right: 1px solid var(--wp--preset--color--light);
 }
 
 .mobile-menu .social-links a:last-child {
@@ -664,7 +633,7 @@
 }
 
 .mobile-menu .social-links svg path {
-    fill: #111111;
+    fill: var(--wp--preset--color--tertiary);
 }
 
 /* --- MOBILNO MENU END --- */
